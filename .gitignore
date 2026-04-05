@@ -8,3 +8,8 @@ backend/.env
 .vscode/*
 !.vscode/settings.json
 !.vscode/launch.json
+
+# Ignorar arquivos de ambiente
+.env
+*/.env
+backend/.env
