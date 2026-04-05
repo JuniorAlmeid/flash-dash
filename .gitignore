@@ -1,0 +1,10 @@
+# Ambiente Virtual e Chaves do Python (Motor de BI)
+backend/__pycache__/
+backend/.venv/
+backend/venv/
+backend/.env
+
+# Configurações locais do VS Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/launch.json
