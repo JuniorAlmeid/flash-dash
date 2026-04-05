@@ -1,0 +1,19 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "💙 Iniciar Front-end (Flutter)",
+      "request": "launch",
+      "type": "dart",
+      "cwd": "${workspaceFolder}/frontend"
+    },
+    {
+      "name": "🐍 Iniciar Motor BI (Python)",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/backend/src/main.py",
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}/backend"
+    }
+  ]
+}

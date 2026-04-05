@@ -1,0 +1,21 @@
+{
+  "editor.formatOnSave": true,
+  "editor.rulers": [80, 120],
+  
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter"
+  },
+  
+  "[dart]": {
+    "editor.defaultFormatter": "Dart-Code.dart-code",
+    "editor.formatOnSave": true
+  },
+  
+  "python.analysis.typeCheckingMode": "basic",
+  "dart.previewFlutterUiGuides": true,
+  "files.exclude": {
+    "**/.git": true,
+    "**/__pycache__": true,
+    "**/.venv": true
+  }
+}
