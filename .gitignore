@@ -13,3 +13,11 @@ backend/.env
 .env
 */.env
 backend/.env
+
+!!!!!!!!!!!!!!!! Para rodar o projeto: uvicorn main:app --reload   !!!!!!!!!!!!!!! 
+
+
+# Banco de Dados
+url banco: https://qookuziywrysqfzofyve.supabase.co
+chave de acesso banco: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFvb2t1eml5d3J5c3Fmem9meXZlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI3Nzg5MDAsImV4cCI6MjA4ODM1NDkwMH0.MWs5415G9R-o8WccWE_qnvei7ha5ZtTpmXvCEfnOzFM
+senha banco Flashdash: secretflashdash
