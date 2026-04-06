@@ -1,37 +1,43 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, File, UploadFile
+from tratamento_dados import limparPlanilha
+from ia_service import analisar_dados_com_ia
+from db_repository import save # ou 'save' como estava no seu
 from fastapi.middleware.cors import CORSMiddleware
-from datetime import datetime
 
-# Inicializa o aplicativo FastAPI
-app = FastAPI(
-    title="Flash-Dash API",
-    description="Motor de Business Intelligence para PMEs",
-    version="0.1.0"
-)
+app = FastAPI()
 
-# Configuração de CORS (Permite que o Flutter converse com o Python)
+# Adicionando o middleware CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"], 
+    allow_origins=["*"], # Permite que qualquer HTML acesse sua API
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-@app.get("/")
-def read_root():
+@app.post("/analisar-planilha")
+async def analisar_rota(arquivo: UploadFile = File(...)):
+    
+    # 1. Lemos os bytes do arquivo enviado pelo usuário
+    conteudo = await arquivo.read()
+    
+    # 2. Enviamos os bytes e o nome para a função do seu colega
+    dados_limpos = limparPlanilha(conteudo, arquivo.filename)
+    
+    # Se der erro na leitura da planilha, já paramos por aqui
+    if dados_limpos["status"] == "error":
+        return dados_limpos
+    
+    # 3. Analisamos com a IA
+    texto_resultado = analisar_dados_com_ia(dados_limpos)
+
+    # 4. Salvamos no banco
+    save(dados_limpos, texto_resultado)
+    
+    # 5. Retornamos tudo para o front-end (A IA + Os dados do gráfico)
     return {
-        "message": "⚡ Bem-vindo ao Motor de BI do Flash-Dash!",
-        "status": "online",
-        "timestamp": datetime.now().isoformat()
+        "status": "sucesso",
+        "insight_da_ia": texto_resultado,
+        "dados_planilha": dados_limpos # O Flutter vai usar isso aqui para desenhar a tela
     }
 
-@app.get("/api/v1/health")
-def health_check():
-    """
-    Endpoint para o QA (Pedro) verificar a saúde do sistema.
-    """
-    return {
-        "status": "ok",
-        "database": "disconnected"
-    }
